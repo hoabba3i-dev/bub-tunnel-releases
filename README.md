@@ -1,4 +1,3 @@
-<img width="1080" height="1486" alt="12778" src="https://github.com/user-attachments/assets/9eead10b-7776-4bc6-8282-a0e45815fa39" />
 # BUB TUNNEL
 
 > **A resilient tunneling platform for difficult networks — with Reverse and Direct modes, multiple transport strategies, live monitoring, traffic control, and resilient failover.**
@@ -290,6 +289,10 @@ Common configuration areas include `Connection`, `Transport`, transport-specific
 
 The live status view can report operational information such as uptime, active connections, traffic, current and peak speed, CPU and memory usage, reconnect counter, peer ping/jitter/packet loss, external connectivity checks, and tunnel health.
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/9eead10b-7776-4bc6-8282-a0e45815fa39" alt="BUB Tunnel live monitoring and traffic limit" width="620">
+</p>
+
 ---
 
 ## 📦 Traffic Limit
@@ -557,6 +560,10 @@ Domain: tunnel.example.com
 ## 📊 مانیتورینگ زنده
 
 بخش `Status` اطلاعات عملیاتی مانند زمان فعالیت، اتصال‌ها، ترافیک، سرعت، مصرف منابع، تعداد اتصال مجدد، `Ping`، `Jitter`، `Packet Loss` و سلامت Tunnel را نمایش می‌دهد.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/9eead10b-7776-4bc6-8282-a0e45815fa39" alt="مانیتورینگ زنده و Traffic Limit" width="620">
+</p>
 
 ---
 
