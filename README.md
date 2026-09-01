@@ -289,10 +289,6 @@ Common configuration areas include `Connection`, `Transport`, transport-specific
 
 The live status view can report operational information such as uptime, active connections, traffic, current and peak speed, CPU and memory usage, reconnect counter, peer ping/jitter/packet loss, external connectivity checks, and tunnel health.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/92b7d46d-d22f-4d17-a702-7122c4ed6f4e" alt="BUB Tunnel live monitoring and traffic limit" width="620">
-</p>
-
 ---
 
 ## 📦 Traffic Limit
@@ -560,10 +556,6 @@ Domain: tunnel.example.com
 ## 📊 مانیتورینگ زنده
 
 بخش `Status` اطلاعات عملیاتی مانند زمان فعالیت، اتصال‌ها، ترافیک، سرعت، مصرف منابع، تعداد اتصال مجدد، `Ping`، `Jitter`، `Packet Loss` و سلامت Tunnel را نمایش می‌دهد.
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/92b7d46d-d22f-4d17-a702-7122c4ed6f4e" alt="مانیتورینگ زنده و Traffic Limit" width="620">
-</p>
 
 ---
 
