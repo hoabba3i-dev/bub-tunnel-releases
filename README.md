@@ -1,11 +1,8 @@
-<img width="1080" height="1282" alt="13302" src="https://github.com/user-attachments/assets/cbee91d8-866b-4c20-ac6a-ec442ae2ad04" />
-<img width="1080" height="1899" alt="13303" src="https://github.com/user-attachments/assets/5e6f6dba-e9e5-4af6-891b-5947ad5358ee" />
-<img width="1080" height="1658" alt="13304" src="https://github.com/user-attachments/assets/5a23de74-7e31-4e43-9b24-85c002c192f0" />
 # BUB TUNNEL
 
 > **A resilient tunneling platform for difficult networks — with Reverse and Direct modes, multiple transport strategies, live monitoring, traffic control, and resilient failover.**
 
-[🇮🇷 راهنمای فارسی](#persian-guide) · [🚀 Installation](#installation) · [↩️ Reverse Setup](#reverse-setup) · [➡️ Direct Setup](#direct-setup) · [🌐 WSSMux Guide](#wssmux-guide) · [🔀 BUBMIX](#bubmix) · [⚡ NEXUS](#nexus) · [🧩 BUBTun](#bubtun) · [🛠️ Manager](#manager) · [📊 Monitoring](#monitoring)
+[🇮🇷 راهنمای فارسی](#persian-guide) · [🧭 Control Center](#control-center) · [🚀 Installation](#installation) · [↩️ Reverse Setup](#reverse-setup) · [➡️ Direct Setup](#direct-setup) · [🌐 WSSMux Guide](#wssmux-guide) · [🔀 BUBMIX](#bubmix) · [⚡ NEXUS](#nexus) · [🧩 BUBTun](#bubtun) · [🛠️ Manager](#manager) · [📊 Monitoring](#monitoring)
 
 BUB Tunnel is designed to create and manage Linux network tunnels without forcing every network path to use the same transport strategy.
 
@@ -34,6 +31,54 @@ A tunnel can operate in **Reverse** or **Direct** mode. Depending on the selecte
 - Integrated GitHub Releases updater
 - License-controlled production releases
 - Linux AMD64 and ARM64 builds
+
+---
+
+<a id="control-center"></a>
+## 🧭 Control Center — v0.90.1
+
+BUB Control Center provides a centralized management layer for BUB Tunnel through the **Web Panel** and **Telegram Bot**. It is designed for remote administration when direct SSH access is inconvenient or unavailable.
+
+Key capabilities include:
+
+- Create and manage tunnels from the Web Panel or Telegram Bot
+- Start, Stop, Restart, Edit and Delete tunnel services remotely
+- Manage multiple Iran / Server and Foreign / Client nodes from one Control Center
+- Separate live monitoring for both tunnel endpoints
+- Traffic, speed, connections, uptime, CPU, memory, ping, jitter and packet-loss visibility
+- In-tunnel speed testing and endpoint live logs
+- BUBMIX management and live carrier status
+- Server-side Traffic Limit and scheduled operations
+- Health Center and operational alerts
+- Encrypted Backup / Restore and Disaster Recovery
+- Fleet recovery and replacement of a lost server without rebuilding every tunnel manually
+- Control Center migration using Restore Code
+- Safe Edit / Restore Points
+- Live Refresh, HTTPS and PWA support
+
+### Dashboard
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/cbee91d8-866b-4c20-ac6a-ec442ae2ad04" alt="BUB Control Center Dashboard" width="760">
+</p>
+
+### Create Tunnel
+
+A logical tunnel can be created from the Control Center by selecting the Iran / Server and Foreign / Client nodes and completing the matching transport settings for both endpoints.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/5a23de74-7e31-4e43-9b24-85c002c192f0" alt="BUB Control Center Create Tunnel" width="760">
+</p>
+
+### Dual Endpoint Monitoring
+
+Monitoring keeps Iran / BUB Server and Foreign / BUB Client data separated so both sides of the logical tunnel can be compared directly.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/5e6f6dba-e9e5-4af6-891b-5947ad5358ee" alt="BUB Control Center Dual Endpoint Monitoring" width="760">
+</p>
+
+> Control Center is a management/control-plane component. Core transport, session, protocol and BUBMIX datapath behavior remain separate from the Control Center layer.
 
 ---
 
@@ -348,7 +393,7 @@ Source code, credentials, tokens, SSH keys, private configuration, and personal 
 
 > **یک پلتفرم قدرتمند و پایدار برای ساخت و مدیریت تونل در شبکه‌های دشوار**
 
-[⬆️ بازگشت به ابتدای صفحه](#bub-tunnel) · [🚀 نصب](#fa-installation) · [↩️ Reverse](#fa-reverse) · [➡️ Direct](#fa-direct) · [🌐 WSSMux](#fa-wssmux) · [🔀 BUBMIX](#fa-bubmix) · [⚡ NEXUS](#fa-nexus) · [🧩 BUBTun](#fa-bubtun) · [🛠️ مدیریت](#fa-manager) · [📊 مانیتورینگ](#fa-monitoring)
+[⬆️ بازگشت به ابتدای صفحه](#bub-tunnel) · [🧭 کنترل سنتر](#fa-control-center) · [🚀 نصب](#fa-installation) · [↩️ Reverse](#fa-reverse) · [➡️ Direct](#fa-direct) · [🌐 WSSMux](#fa-wssmux) · [🔀 BUBMIX](#fa-bubmix) · [⚡ NEXUS](#fa-nexus) · [🧩 BUBTun](#fa-bubtun) · [🛠️ مدیریت](#fa-manager) · [📊 مانیتورینگ](#fa-monitoring)
 
 `BUB Tunnel` برای ساخت و مدیریت تونل‌های شبکه در `Linux` طراحی شده است و از حالت‌های `Reverse` و `Direct` و چندین روش انتقال پشتیبانی می‌کند.
 
@@ -372,6 +417,54 @@ Source code, credentials, tokens, SSH keys, private configuration, and personal 
 - `Scheduled Restart`
 - بروزرسانی داخلی
 - پشتیبانی از `Linux AMD64` و `Linux ARM64`
+
+---
+
+<a id="fa-control-center"></a>
+## 🧭 Control Center — v0.90.1
+
+`BUB Control Center` یک لایه مدیریت متمرکز برای BUB Tunnel است که از طریق **Web Panel** و **Telegram Bot** امکان مدیریت سرورها و Tunnelها را فراهم می‌کند؛ مخصوصاً زمانی که دسترسی مستقیم SSH مناسب یا در دسترس نیست.
+
+قابلیت‌های مهم:
+
+- ساخت و مدیریت Tunnel از Web Panel یا Telegram Bot
+- Start، Stop، Restart، Edit و Delete سرویس‌های Tunnel از راه دور
+- مدیریت چند Server ایران و Foreign از یک Control Center
+- مانیتورینگ زنده و جداگانه هر دو سمت Server / Client
+- نمایش Traffic، Speed، Connections، Uptime، CPU، RAM، Ping، Jitter و Packet Loss
+- Speed Test داخل Tunnel و Live Log هر Endpoint
+- مدیریت BUBMIX و مشاهده وضعیت Carrierها
+- Traffic Limit سمت Server و عملیات زمان‌بندی‌شده
+- Health Center و هشدارهای عملیاتی
+- Backup رمزگذاری‌شده، Restore و Disaster Recovery
+- بازیابی Fleet و جایگزینی سرور از دست‌رفته بدون ساخت مجدد دستی همه Tunnelها
+- انتقال Control Center با Restore Code
+- Safe Edit / Restore Points
+- Live Refresh، HTTPS و PWA
+
+### Dashboard
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/cbee91d8-866b-4c20-ac6a-ec442ae2ad04" alt="داشبورد BUB Control Center" width="760">
+</p>
+
+### ساخت Tunnel از Control Center
+
+Tunnel منطقی را می‌توان با انتخاب Node ایران / Server و Foreign / Client و تکمیل تنظیمات متناظر Transport برای هر دو سمت، مستقیماً از Control Center ایجاد کرد.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/5a23de74-7e31-4e43-9b24-85c002c192f0" alt="ساخت Tunnel در BUB Control Center" width="760">
+</p>
+
+### مانیتورینگ جداگانه دو Endpoint
+
+اطلاعات Iran / BUB Server و Foreign / BUB Client جدا نمایش داده می‌شوند تا وضعیت هر دو سمت Tunnel مستقیماً قابل مقایسه باشد.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/5e6f6dba-e9e5-4af6-891b-5947ad5358ee" alt="مانیتورینگ دو Endpoint در BUB Control Center" width="760">
+</p>
+
+> Control Center لایه مدیریت و Control Plane است و از Core / Transport / Session / Protocol / BUBMIX datapath جدا نگه داشته می‌شود.
 
 ---
 
