@@ -19,6 +19,8 @@
   <a href="docs/fa/monitoring.md"><img src="https://img.shields.io/badge/Monitoring-FFD700?style=flat-square" alt="مانیتورینگ"></a>
 </p>
 
+---
+
 <p align="center">
   <img src="https://img.shields.io/badge/%F0%9F%87%AC%F0%9F%87%A7%20English%20Guide-FFD700?style=for-the-badge" alt="🇬🇧 English Guide">
 </p>
@@ -424,8 +426,6 @@ Source code, credentials, tokens, SSH keys, private configuration, and personal 
 # 🇮🇷 راهنمای فارسی BUB TUNNEL
 
 > **یک پلتفرم قدرتمند و پایدار برای ساخت و مدیریت تونل در شبکه‌های دشوار**
-
-[⬆️ بازگشت به ابتدای صفحه](#bub-tunnel) · [🧭 کنترل سنتر](#fa-control-center) · [🚀 نصب](#fa-installation) · [↩️ Reverse](#fa-reverse) · [➡️ Direct](#fa-direct) · [🌐 WSSMux](#fa-wssmux) · [🔀 BUBMIX](#fa-bubmix) · [⚡ NEXUS](#fa-nexus) · [🧩 BUBTun](#fa-bubtun) · [🛠️ مدیریت](#fa-manager) · [📊 مانیتورینگ](#fa-monitoring)
 
 `BUB Tunnel` برای ساخت و مدیریت تونل‌های شبکه در `Linux` طراحی شده است و از حالت‌های `Reverse` و `Direct` و چندین روش انتقال پشتیبانی می‌کند.
 
