@@ -3,35 +3,35 @@
 > **A resilient tunneling platform for difficult networks — with Reverse and Direct modes, multiple transport strategies, live monitoring, traffic control, and resilient failover.**
 
 <p align="center">
-  <a href="#persian-guide"><img src="https://img.shields.io/badge/%D9%81%D8%A7%D8%B1%D8%B3%DB%8C%20%F0%9F%87%AE%F0%9F%87%B7-0969da?style=for-the-badge" alt="فارسی 🇮🇷"></a>
+  <a href="#persian-guide"><img src="https://img.shields.io/badge/Persian%20Guide-FFD700?style=for-the-badge" alt="فارسی 🇮🇷"></a>
 </p>
 
 <p align="center"><strong>فارسی</strong></p>
-<p align="center">
-  <a href="docs/fa/control-center.md"><img src="https://img.shields.io/badge/%DA%A9%D9%86%D8%AA%D8%B1%D9%84%20%D8%B3%D9%86%D8%AA%D8%B1-2f81f7?style=flat-square" alt="کنترل سنتر"></a>
-  <a href="docs/fa/installation.md"><img src="https://img.shields.io/badge/%D9%86%D8%B5%D8%A8-2f81f7?style=flat-square" alt="نصب"></a>
-  <a href="docs/fa/reverse.md"><img src="https://img.shields.io/badge/Reverse-2f81f7?style=flat-square" alt="Reverse"></a>
-  <a href="docs/fa/direct.md"><img src="https://img.shields.io/badge/Direct-2f81f7?style=flat-square" alt="Direct"></a>
-  <a href="docs/fa/wssmux.md"><img src="https://img.shields.io/badge/WSSMux-2f81f7?style=flat-square" alt="WSSMux"></a>
-  <a href="docs/fa/bubmix.md"><img src="https://img.shields.io/badge/BUBMIX-2f81f7?style=flat-square" alt="BUBMIX"></a>
-  <a href="docs/fa/nexus.md"><img src="https://img.shields.io/badge/NEXUS-2f81f7?style=flat-square" alt="NEXUS"></a>
-  <a href="docs/fa/bubtun.md"><img src="https://img.shields.io/badge/BUBTun-2f81f7?style=flat-square" alt="BUBTun"></a>
-  <a href="docs/fa/manager.md"><img src="https://img.shields.io/badge/%D9%85%D8%AF%DB%8C%D8%B1%DB%8C%D8%AA-2f81f7?style=flat-square" alt="مدیریت"></a>
-  <a href="docs/fa/monitoring.md"><img src="https://img.shields.io/badge/%D9%85%D8%A7%D9%86%DB%8C%D8%AA%D9%88%D8%B1%DB%8C%D9%86%DA%AF-2f81f7?style=flat-square" alt="مانیتورینگ"></a>
+<p align="center" dir="rtl">
+  <a href="docs/fa/control-center.md"><img src="https://img.shields.io/badge/Control%20Center-FFD700?style=flat-square" alt="کنترل سنتر"></a>
+  <a href="docs/fa/installation.md"><img src="https://img.shields.io/badge/Install-FFD700?style=flat-square" alt="نصب"></a>
+  <a href="docs/fa/reverse.md"><img src="https://img.shields.io/badge/Reverse-FFD700?style=flat-square" alt="راه‌اندازی Reverse"></a>
+  <a href="docs/fa/direct.md"><img src="https://img.shields.io/badge/Direct-FFD700?style=flat-square" alt="راه‌اندازی Direct"></a>
+  <a href="docs/fa/wssmux.md"><img src="https://img.shields.io/badge/WSSMux-FFD700?style=flat-square" alt="راهنمای WSSMux"></a>
+  <a href="docs/fa/bubmix.md"><img src="https://img.shields.io/badge/BUBMIX-FFD700?style=flat-square" alt="BUBMIX"></a>
+  <a href="docs/fa/nexus.md"><img src="https://img.shields.io/badge/NEXUS-FFD700?style=flat-square" alt="NEXUS"></a>
+  <a href="docs/fa/bubtun.md"><img src="https://img.shields.io/badge/BUBTun-FFD700?style=flat-square" alt="BUBTun"></a>
+  <a href="docs/fa/manager.md"><img src="https://img.shields.io/badge/Manager-FFD700?style=flat-square" alt="مدیریت"></a>
+  <a href="docs/fa/monitoring.md"><img src="https://img.shields.io/badge/Monitoring-FFD700?style=flat-square" alt="مانیتورینگ"></a>
 </p>
 
 <p align="center"><strong>English</strong></p>
 <p align="center">
-  <a href="docs/en/control-center.md"><img src="https://img.shields.io/badge/Control%20Center-0969da?style=flat-square" alt="Control Center"></a>
-  <a href="docs/en/installation.md"><img src="https://img.shields.io/badge/Installation-0969da?style=flat-square" alt="Installation"></a>
-  <a href="docs/en/reverse.md"><img src="https://img.shields.io/badge/Reverse%20Setup-0969da?style=flat-square" alt="Reverse Setup"></a>
-  <a href="docs/en/direct.md"><img src="https://img.shields.io/badge/Direct%20Setup-0969da?style=flat-square" alt="Direct Setup"></a>
-  <a href="docs/en/wssmux.md"><img src="https://img.shields.io/badge/WSSMux%20Guide-0969da?style=flat-square" alt="WSSMux Guide"></a>
-  <a href="docs/en/bubmix.md"><img src="https://img.shields.io/badge/BUBMIX-0969da?style=flat-square" alt="BUBMIX"></a>
-  <a href="docs/en/nexus.md"><img src="https://img.shields.io/badge/NEXUS-0969da?style=flat-square" alt="NEXUS"></a>
-  <a href="docs/en/bubtun.md"><img src="https://img.shields.io/badge/BUBTun-0969da?style=flat-square" alt="BUBTun"></a>
-  <a href="docs/en/manager.md"><img src="https://img.shields.io/badge/Manager-0969da?style=flat-square" alt="Manager"></a>
-  <a href="docs/en/monitoring.md"><img src="https://img.shields.io/badge/Monitoring-0969da?style=flat-square" alt="Monitoring"></a>
+  <a href="docs/en/control-center.md"><img src="https://img.shields.io/badge/Control%20Center-FFD700?style=flat-square" alt="Control Center"></a>
+  <a href="docs/en/installation.md"><img src="https://img.shields.io/badge/Installation-FFD700?style=flat-square" alt="Installation"></a>
+  <a href="docs/en/reverse.md"><img src="https://img.shields.io/badge/Reverse%20Setup-FFD700?style=flat-square" alt="Reverse Setup"></a>
+  <a href="docs/en/direct.md"><img src="https://img.shields.io/badge/Direct%20Setup-FFD700?style=flat-square" alt="Direct Setup"></a>
+  <a href="docs/en/wssmux.md"><img src="https://img.shields.io/badge/WSSMux%20Guide-FFD700?style=flat-square" alt="WSSMux Guide"></a>
+  <a href="docs/en/bubmix.md"><img src="https://img.shields.io/badge/BUBMIX-FFD700?style=flat-square" alt="BUBMIX"></a>
+  <a href="docs/en/nexus.md"><img src="https://img.shields.io/badge/NEXUS-FFD700?style=flat-square" alt="NEXUS"></a>
+  <a href="docs/en/bubtun.md"><img src="https://img.shields.io/badge/BUBTun-FFD700?style=flat-square" alt="BUBTun"></a>
+  <a href="docs/en/manager.md"><img src="https://img.shields.io/badge/Manager-FFD700?style=flat-square" alt="Manager"></a>
+  <a href="docs/en/monitoring.md"><img src="https://img.shields.io/badge/Monitoring-FFD700?style=flat-square" alt="Monitoring"></a>
 </p>
 
 BUB Tunnel is designed to create and manage Linux network tunnels without forcing every network path to use the same transport strategy.
