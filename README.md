@@ -2,12 +2,14 @@
 
 > **A resilient tunneling platform for difficult networks — with Reverse and Direct modes, multiple transport strategies, live monitoring, traffic control, and resilient failover.**
 
-[🇮🇷 راهنمای فارسی](docs/fa/README.md)
+<p align="center">
+  <a href="#persian-guide"><strong>فارسی 🇮🇷</strong></a>
+</p>
 
-**فارسی:**  
+**فارسی**  
 [🧭 کنترل سنتر](docs/fa/control-center.md) · [🚀 نصب](docs/fa/installation.md) · [↩️ راه‌اندازی Reverse](docs/fa/reverse.md) · [➡️ راه‌اندازی Direct](docs/fa/direct.md) · [🌐 راهنمای WSSMux](docs/fa/wssmux.md) · [🔀 BUBMIX](docs/fa/bubmix.md) · [⚡ NEXUS](docs/fa/nexus.md) · [🧩 BUBTun](docs/fa/bubtun.md) · [🛠️ مدیریت](docs/fa/manager.md) · [📊 مانیتورینگ](docs/fa/monitoring.md)
 
-**English:**  
+**English**  
 [🧭 Control Center](docs/en/control-center.md) · [🚀 Installation](docs/en/installation.md) · [↩️ Reverse Setup](docs/en/reverse.md) · [➡️ Direct Setup](docs/en/direct.md) · [🌐 WSSMux Guide](docs/en/wssmux.md) · [🔀 BUBMIX](docs/en/bubmix.md) · [⚡ NEXUS](docs/en/nexus.md) · [🧩 BUBTun](docs/en/bubtun.md) · [🛠️ Manager](docs/en/manager.md) · [📊 Monitoring](docs/en/monitoring.md)
 
 BUB Tunnel is designed to create and manage Linux network tunnels without forcing every network path to use the same transport strategy.
