@@ -3,10 +3,9 @@
 > **A resilient tunneling platform for difficult networks — with Reverse and Direct modes, multiple transport strategies, live monitoring, traffic control, and resilient failover.**
 
 <p align="center">
-  <a href="#persian-guide"><img src="https://img.shields.io/badge/Persian%20Guide-FFD700?style=for-the-badge" alt="فارسی 🇮🇷"></a>
+  <a href="#persian-guide"><img src="https://img.shields.io/badge/%F0%9F%87%AE%F0%9F%87%B7%20Persian%20Guide-FFD700?style=for-the-badge" alt="🇮🇷 Persian Guide"></a>
 </p>
 
-<p align="center"><strong>فارسی</strong></p>
 <p align="center" dir="rtl">
   <a href="docs/fa/control-center.md"><img src="https://img.shields.io/badge/Control%20Center-FFD700?style=flat-square" alt="کنترل سنتر"></a>
   <a href="docs/fa/installation.md"><img src="https://img.shields.io/badge/Install-FFD700?style=flat-square" alt="نصب"></a>
@@ -20,7 +19,10 @@
   <a href="docs/fa/monitoring.md"><img src="https://img.shields.io/badge/Monitoring-FFD700?style=flat-square" alt="مانیتورینگ"></a>
 </p>
 
-<p align="center"><strong>English</strong></p>
+<p align="center">
+  <img src="https://img.shields.io/badge/%F0%9F%87%AC%F0%9F%87%A7%20English%20Guide-FFD700?style=for-the-badge" alt="🇬🇧 English Guide">
+</p>
+
 <p align="center">
   <a href="docs/en/control-center.md"><img src="https://img.shields.io/badge/Control%20Center-FFD700?style=flat-square" alt="Control Center"></a>
   <a href="docs/en/installation.md"><img src="https://img.shields.io/badge/Installation-FFD700?style=flat-square" alt="Installation"></a>
