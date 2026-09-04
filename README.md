@@ -2,13 +2,13 @@
 
 > **A resilient tunneling platform for difficult networks — with Reverse and Direct modes, multiple transport strategies, live monitoring, traffic control, and resilient failover.**
 
-[🇮🇷 راهنمای فارسی](#persian-guide)
+[🇮🇷 راهنمای فارسی](docs/fa/README.md)
 
 **فارسی:**  
-[🧭 کنترل سنتر](#fa-control-center) · [🚀 نصب](#fa-installation) · [↩️ راه‌اندازی Reverse](#fa-reverse) · [➡️ راه‌اندازی Direct](#fa-direct) · [🌐 راهنمای WSSMux](#fa-wssmux) · [🔀 BUBMIX](#fa-bubmix) · [⚡ NEXUS](#fa-nexus) · [🧩 BUBTun](#fa-bubtun) · [🛠️ مدیریت](#fa-manager) · [📊 مانیتورینگ](#fa-monitoring)
+[🧭 کنترل سنتر](docs/fa/control-center.md) · [🚀 نصب](docs/fa/installation.md) · [↩️ راه‌اندازی Reverse](docs/fa/reverse.md) · [➡️ راه‌اندازی Direct](docs/fa/direct.md) · [🌐 راهنمای WSSMux](docs/fa/wssmux.md) · [🔀 BUBMIX](docs/fa/bubmix.md) · [⚡ NEXUS](docs/fa/nexus.md) · [🧩 BUBTun](docs/fa/bubtun.md) · [🛠️ مدیریت](docs/fa/manager.md) · [📊 مانیتورینگ](docs/fa/monitoring.md)
 
 **English:**  
-[🧭 Control Center](#control-center) · [🚀 Installation](#installation) · [↩️ Reverse Setup](#reverse-setup) · [➡️ Direct Setup](#direct-setup) · [🌐 WSSMux Guide](#wssmux-guide) · [🔀 BUBMIX](#bubmix) · [⚡ NEXUS](#nexus) · [🧩 BUBTun](#bubtun) · [🛠️ Manager](#manager) · [📊 Monitoring](#monitoring)
+[🧭 Control Center](docs/en/control-center.md) · [🚀 Installation](docs/en/installation.md) · [↩️ Reverse Setup](docs/en/reverse.md) · [➡️ Direct Setup](docs/en/direct.md) · [🌐 WSSMux Guide](docs/en/wssmux.md) · [🔀 BUBMIX](docs/en/bubmix.md) · [⚡ NEXUS](docs/en/nexus.md) · [🧩 BUBTun](docs/en/bubtun.md) · [🛠️ Manager](docs/en/manager.md) · [📊 Monitoring](docs/en/monitoring.md)
 
 BUB Tunnel is designed to create and manage Linux network tunnels without forcing every network path to use the same transport strategy.
 
