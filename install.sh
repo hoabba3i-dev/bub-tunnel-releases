@@ -1,8 +1,19 @@
 #!/bin/bash
 set -euo pipefail
 
-REPO="https://github.com/hoabba3i-dev/bub-tunnel-releases"
+OWNER="hoabba3i-dev"
+REPO_NAME="bub-tunnel-releases"
+REPO="https://github.com/${OWNER}/${REPO_NAME}"
+LATEST_URL="${REPO}/releases/latest"
 INSTALL_DIR="/opt/bub-tunnel"
+BIN_DIR="/usr/local/bin"
+
+cleanup() {
+    if [ -n "${TMP:-}" ] && [ -d "${TMP:-}" ]; then
+        rm -rf "$TMP"
+    fi
+}
+trap cleanup EXIT
 
 echo "======================================"
 echo "        BUB Tunnel Installer"
@@ -21,106 +32,91 @@ apt-get install -y ca-certificates curl iproute2 iptables tar
 
 ARCH="$(dpkg --print-architecture)"
 case "$ARCH" in
-    amd64)
-        RELEASE_ARCH="amd64"
-        ;;
-    arm64)
-        RELEASE_ARCH="arm64"
-        ;;
+    amd64) RELEASE_ARCH="amd64" ;;
+    arm64) RELEASE_ARCH="arm64" ;;
     *)
         echo "ERROR: Unsupported architecture: $ARCH"
         exit 1
         ;;
 esac
 
-# Discover the latest release through GitHub's public redirect instead of
-# api.github.com. This avoids unauthenticated REST API rate-limit failures.
-LATEST_URL="$(curl -4 -fsSL --retry 3 -o /dev/null -w '%{url_effective}' "$REPO/releases/latest")"
-REPO_REF="${LATEST_URL##*/}"
+LATEST_EFFECTIVE="$(curl -fsSL -o /dev/null -w '%{url_effective}' "$LATEST_URL")"
+REPO_REF="${LATEST_EFFECTIVE##*/}"
 
-if [ -z "$REPO_REF" ] || [ "$REPO_REF" = "latest" ] || [[ "$REPO_REF" != v* ]]; then
-    echo "ERROR: Could not determine latest BUB release."
-    echo "Resolved URL: $LATEST_URL"
+# Accept both historical vX.Y.Z and canonical v.X.Y.Z tags.
+if [[ ! "$REPO_REF" =~ ^v\.?[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    echo "ERROR: Could not determine latest BUB release from: $LATEST_EFFECTIVE"
     exit 1
 fi
 
 EXPECTED_ASSET="BUB-${REPO_REF}-linux-${RELEASE_ARCH}.tar.gz"
-ASSET_URL="$REPO/releases/download/${REPO_REF}/${EXPECTED_ASSET}"
+ASSET_URL="${REPO}/releases/download/${REPO_REF}/${EXPECTED_ASSET}"
 
 echo "[2/5] Preparing BUB $REPO_REF..."
-echo "Architecture: $ARCH"
-echo "Asset: $EXPECTED_ASSET"
 
+ASSET_NAME="${ASSET_URL##*/}"
 TMP="$(mktemp -d /tmp/bub-install.XXXXXX)"
-trap 'rm -rf "$TMP"' EXIT
 mkdir -p "$TMP/extracted"
 
 echo "[3/5] Downloading BUB..."
-curl -4 -fL --retry 3 --retry-delay 1 "$ASSET_URL" -o "$TMP/release.tar.gz"
+echo "Asset: $ASSET_NAME"
+curl -fL --retry 3 --retry-delay 1 "$ASSET_URL" -o "$TMP/release.tar.gz"
 
 echo "[4/5] Installing BUB binaries..."
 tar -xzf "$TMP/release.tar.gz" -C "$TMP/extracted"
 
-BIN_BUB="$(find "$TMP/extracted" -type f -name 'bub' -print -quit)"
-BIN_CLIENT="$(find "$TMP/extracted" -type f -name 'bub-client' -print -quit)"
-BIN_SERVER="$(find "$TMP/extracted" -type f -name 'bub-server' -print -quit)"
-BIN_CONTROL_CENTER="$(find "$TMP/extracted" -type f -name 'bub-control-center' -print -quit)"
-MANAGER_SCRIPT="$(find "$TMP/extracted" -type f -name 'bub-manager.sh' -print -quit)"
+for BIN in bub bub-server bub-client bub-control-center; do
+    SRC_BIN="$(find "$TMP/extracted" -type f -name "$BIN" -print -quit)"
+    if [ -z "$SRC_BIN" ]; then
+        echo "ERROR: $BIN not found in release."
+        exit 1
+    fi
+    chmod 755 "$SRC_BIN"
+    case "$BIN" in
+        bub) BIN_BUB="$SRC_BIN" ;;
+        bub-server) BIN_SERVER="$SRC_BIN" ;;
+        bub-client) BIN_CLIENT="$SRC_BIN" ;;
+        bub-control-center) BIN_CONTROL="$SRC_BIN" ;;
+    esac
+done
 
-[ -n "$BIN_BUB" ] || {
-    echo "ERROR: bub not found in release."
-    exit 1
-}
-
-[ -n "$BIN_CLIENT" ] || {
-    echo "ERROR: bub-client not found in release."
-    exit 1
-}
-
-[ -n "$BIN_SERVER" ] || {
-    echo "ERROR: bub-server not found in release."
-    exit 1
-}
-
-[ -n "$BIN_CONTROL_CENTER" ] || {
-    echo "ERROR: bub-control-center not found in release."
-    exit 1
-}
-
-[ -n "$MANAGER_SCRIPT" ] || {
-    echo "ERROR: bub-manager.sh not found in release."
-    exit 1
-}
-
-mkdir -p "$INSTALL_DIR"
-mkdir -p /etc/bub-tunnel
-mkdir -p /var/log/bub-tunnel
+mkdir -p "$INSTALL_DIR" /etc/bub-tunnel /var/log/bub-tunnel "$INSTALL_DIR/backups"
 
 STAMP="$(date +%Y%m%d-%H%M%S)"
 BACKUP_DIR="$INSTALL_DIR/backups/$STAMP"
 mkdir -p "$BACKUP_DIR"
 
 for BIN in bub bub-server bub-client bub-control-center; do
-    if [ -f "/usr/local/bin/$BIN" ]; then
-        cp -a "/usr/local/bin/$BIN" "$BACKUP_DIR/$BIN"
+    if [ -f "$BIN_DIR/$BIN" ]; then
+        cp -a "$BIN_DIR/$BIN" "$BACKUP_DIR/$BIN"
     fi
 done
 
-if [ -f "$INSTALL_DIR/bub-manager.sh" ]; then
-    cp -a "$INSTALL_DIR/bub-manager.sh" "$BACKUP_DIR/bub-manager.sh"
+install -m 755 "$BIN_SERVER" "$BIN_DIR/bub-server.new"
+install -m 755 "$BIN_CLIENT" "$BIN_DIR/bub-client.new"
+install -m 755 "$BIN_BUB" "$BIN_DIR/bub.new"
+install -m 755 "$BIN_CONTROL" "$BIN_DIR/bub-control-center.new"
+
+mv -f "$BIN_DIR/bub-server.new" "$BIN_DIR/bub-server"
+mv -f "$BIN_DIR/bub-client.new" "$BIN_DIR/bub-client"
+mv -f "$BIN_DIR/bub.new" "$BIN_DIR/bub"
+mv -f "$BIN_DIR/bub-control-center.new" "$BIN_DIR/bub-control-center"
+
+# Install the compatibility manager wrapper when it is bundled in the release.
+# Fall back to a symlink for compatibility with older binary-only archives.
+BIN_MANAGER="$(find "$TMP/extracted" -type f -name 'bub-manager.sh' -print -quit)"
+if [ -n "$BIN_MANAGER" ]; then
+    install -m 755 "$BIN_MANAGER" "$INSTALL_DIR/bub-manager.sh"
+    install -m 755 "$INSTALL_DIR/bub-manager.sh" "$BIN_DIR/bub-manager"
+else
+    ln -sfn "$BIN_DIR/bub" "$BIN_DIR/bub-manager"
 fi
 
-install -m 755 "$BIN_BUB" /usr/local/bin/bub
-install -m 755 "$BIN_CLIENT" /usr/local/bin/bub-client
-install -m 755 "$BIN_SERVER" /usr/local/bin/bub-server
-install -m 755 "$BIN_CONTROL_CENTER" /usr/local/bin/bub-control-center
-install -m 755 "$MANAGER_SCRIPT" "$INSTALL_DIR/bub-manager.sh"
+NORMALIZED_VERSION="${REPO_REF#v}"
+NORMALIZED_VERSION="${NORMALIZED_VERSION#.}"
+printf "%s\n" "$NORMALIZED_VERSION" > "$INSTALL_DIR/VERSION"
 
-# Compatibility commands
-ln -sf /usr/local/bin/bub /usr/local/bin/bub-manager
-ln -sf "$INSTALL_DIR/bub-manager.sh" /usr/local/bin/bub-manager.sh
-
-printf "%s\n" "${REPO_REF#v}" > "$INSTALL_DIR/VERSION"
+hash -r 2>/dev/null || true
 
 echo "[5/5] Installation completed."
 echo
@@ -128,12 +124,14 @@ echo "======================================"
 echo "       BUB Tunnel installed"
 echo "======================================"
 echo
-echo "Version        : $REPO_REF"
-echo "BUB            : /usr/local/bin/bub"
-echo "Server         : /usr/local/bin/bub-server"
-echo "Client         : /usr/local/bin/bub-client"
-echo "Control Center : /usr/local/bin/bub-control-center"
-echo "Manager Script : $INSTALL_DIR/bub-manager.sh"
+echo "Version : $REPO_REF"
+echo "BUB     : $BIN_DIR/bub"
+echo "Server  : $BIN_DIR/bub-server"
+echo "Client  : $BIN_DIR/bub-client"
+echo "Control : $BIN_DIR/bub-control-center"
+echo
+echo "Installed files:"
+ls -lh "$BIN_DIR/bub" "$BIN_DIR/bub-server" "$BIN_DIR/bub-client" "$BIN_DIR/bub-control-center"
 echo
 echo "Run:"
 echo "  bub"
