@@ -49,18 +49,34 @@ if [[ ! "$REPO_REF" =~ ^(v\.?)?[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
     exit 1
 fi
 
-EXPECTED_ASSET="BUB-${REPO_REF}-linux-${RELEASE_ARCH}.tar.gz"
-ASSET_URL="${REPO}/releases/download/${REPO_REF}/${EXPECTED_ASSET}"
+# Support both historical lowercase assets (bub-vX.Y.Z-...) and newer
+# uppercase assets (BUB-X.Y.Z-...). Prefer the historical form first so the
+# v0.90.3 bridge release remains installable by the same convention as v0.90.2.
+ASSET_CANDIDATES=(
+    "bub-${REPO_REF}-linux-${RELEASE_ARCH}.tar.gz"
+    "BUB-${REPO_REF}-linux-${RELEASE_ARCH}.tar.gz"
+)
 
 echo "[2/5] Preparing BUB $REPO_REF..."
 
-ASSET_NAME="${ASSET_URL##*/}"
 TMP="$(mktemp -d /tmp/bub-install.XXXXXX)"
 mkdir -p "$TMP/extracted"
 
 echo "[3/5] Downloading BUB..."
+ASSET_NAME=""
+for CANDIDATE in "${ASSET_CANDIDATES[@]}"; do
+    ASSET_URL="${REPO}/releases/download/${REPO_REF}/${CANDIDATE}"
+    echo "Trying asset: $CANDIDATE"
+    if curl -fL --retry 2 --retry-delay 1 "$ASSET_URL" -o "$TMP/release.tar.gz"; then
+        ASSET_NAME="$CANDIDATE"
+        break
+    fi
+done
+if [ -z "$ASSET_NAME" ]; then
+    echo "ERROR: No compatible release asset found for $REPO_REF / $RELEASE_ARCH"
+    exit 1
+fi
 echo "Asset: $ASSET_NAME"
-curl -fL --retry 3 --retry-delay 1 "$ASSET_URL" -o "$TMP/release.tar.gz"
 
 echo "[4/5] Installing BUB binaries..."
 tar -xzf "$TMP/release.tar.gz" -C "$TMP/extracted"
