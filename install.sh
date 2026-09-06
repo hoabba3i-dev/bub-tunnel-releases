@@ -43,8 +43,8 @@ esac
 LATEST_EFFECTIVE="$(curl -fsSL -o /dev/null -w '%{url_effective}' "$LATEST_URL")"
 REPO_REF="${LATEST_EFFECTIVE##*/}"
 
-# Accept both historical vX.Y.Z and canonical v.X.Y.Z tags.
-if [[ ! "$REPO_REF" =~ ^v\.?[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+# Accept canonical X.Y.Z plus historical vX.Y.Z and v.X.Y.Z tags.
+if [[ ! "$REPO_REF" =~ ^(v\.?)?[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
     echo "ERROR: Could not determine latest BUB release from: $LATEST_EFFECTIVE"
     exit 1
 fi
