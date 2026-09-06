@@ -1,5 +1,3 @@
-<img width="1080" height="1318" alt="14104" src="https://github.com/user-attachments/assets/3fe46ecd-efea-4c42-87b2-c63ac8dce78e" />
-<img width="1080" height="1482" alt="14107" src="https://github.com/user-attachments/assets/fa982ca2-a171-4798-8469-0a31d6f9abce" />
 # BUB TUNNEL
 
 > **A resilient tunneling platform for difficult networks — with Reverse and Direct modes, multiple transport strategies, live monitoring, traffic control, and resilient failover.**
@@ -149,7 +147,7 @@ Linux ARM64
 BUB is managed from the main `bub` interface.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/fd783572-071a-450d-afd7-41fe77ceb5fc" alt="BUB Tunnel main menu" width="680">
+  <img src="https://github.com/user-attachments/assets/3fe46ecd-efea-4c42-87b2-c63ac8dce78e" alt="BUB Tunnel main menu" width="680">
 </p>
 
 During setup, choose the tunnel direction first and then complete the transport-specific configuration.
@@ -238,7 +236,7 @@ Run `bub`, choose `Setup Server → Direct`, and use the corresponding tunnel po
 Different transports are intended for different network conditions.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/cea4a927-9eef-4293-a7b1-384c0de0fab4" alt="BUB Tunnel transport selection" width="620">
+  <img src="https://github.com/user-attachments/assets/fa982ca2-a171-4798-8469-0a31d6f9abce" alt="BUB Tunnel transport selection" width="620">
 </p>
 
 ---
@@ -516,7 +514,7 @@ curl -fsSL https://raw.githubusercontent.com/hoabba3i-dev/bub-tunnel-releases/ma
 ## 🧭 شروع کار با Manager
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/fd783572-071a-450d-afd7-41fe77ceb5fc" alt="منوی اصلی BUB Tunnel" width="680">
+  <img src="https://github.com/user-attachments/assets/3fe46ecd-efea-4c42-87b2-c63ac8dce78e" alt="منوی اصلی BUB Tunnel" width="680">
 </p>
 
 ابتدا جهت Tunnel را انتخاب کنید و سپس تنظیمات روش انتقال موردنظر را انجام دهید.
@@ -578,7 +576,7 @@ Foreign / Client
 روش‌های انتقال BUB از خانواده‌های `TCP`، `Web/TLS`، `UDP`، `BUB` و روش‌های پیشرفته تشکیل شده‌اند.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/cea4a927-9eef-4293-a7b1-384c0de0fab4" alt="فهرست روش‌های انتقال BUB Tunnel" width="620">
+  <img src="https://github.com/user-attachments/assets/fa982ca2-a171-4798-8469-0a31d6f9abce" alt="فهرست روش‌های انتقال BUB Tunnel" width="620">
 </p>
 
 ---
