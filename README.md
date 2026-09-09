@@ -40,7 +40,7 @@
 
 BUB Tunnel is designed to create and manage Linux network tunnels without forcing every network path to use the same transport strategy.
 
-A tunnel can operate in **Reverse** or **Direct** mode. Depending on the selected mode and deployment, BUB provides conventional transports such as `TCP`, `UDP`, `WebSocket`, and `TLS`, as well as BUB-specific technologies such as `NEXUS`, `BUBTun`, and `BUBMIX`.
+A tunnel can operate in **Reverse** or **Direct** mode. Depending on the selected mode and deployment, BUB provides conventional transports such as `TCP`, `UDP`, `WebSocket`, and `TLS`, as well as BUB-specific technologies such as `NEXUS`, `BUBTun`, `BUB Spoof`, and `BUBMIX`.
 
 ---
 
@@ -50,7 +50,7 @@ A tunnel can operate in **Reverse** or **Direct** mode. Depending on the selecte
 - `TCP Raw`, `TCP Mux`, `TCP Shadow`, `TCP Core`
 - `WS Mux`, `WSS Mux`, `TLS Mux`
 - `UDP`, `KCP`, `QUIC`
-- `ICMP Echo`
+- `ICMP Echo`, `BUB Spoof`
 - `NEXUS` resilient multipath connectivity
 - `BUBTun` dedicated transport
 - `BUBMIX` multi-carrier management for Reverse tunnels
@@ -229,7 +229,7 @@ Run `bub`, choose `Setup Server → Direct`, and use the corresponding tunnel po
 | TCP | `TCP Raw`, `TCP Mux`, `TCP Shadow` |
 | Web / TLS | `WS Mux`, `WSS Mux`, `TLS Mux` |
 | UDP | `UDP`, `KCP`, `QUIC` |
-| Advanced | `TCP Core`, `ICMP Echo` |
+| Advanced | `TCP Core`, `ICMP Echo`, `BUB Spoof` |
 | BUB | `BUBTun`, `NEXUS` |
 | Orchestration | `BUBMIX` |
 
@@ -437,7 +437,7 @@ Source code, credentials, tokens, SSH keys, private configuration, and personal 
 - `TCP Raw`، `TCP Mux`، `TCP Shadow` و `TCP Core`
 - `WS Mux`، `WSS Mux` و `TLS Mux`
 - `UDP`، `KCP` و `QUIC`
-- `ICMP Echo`
+- `ICMP Echo` و `BUB Spoof`
 - ارتباط چندمسیره با `NEXUS`
 - روش انتقال اختصاصی `BUBTun`
 - مدیریت چند مسیر در `Reverse` با `BUBMIX`
@@ -573,7 +573,7 @@ Foreign / Client
 
 ## 🚚 روش‌های انتقال
 
-روش‌های انتقال BUB از خانواده‌های `TCP`، `Web/TLS`، `UDP`، `BUB` و روش‌های پیشرفته تشکیل شده‌اند.
+روش‌های انتقال BUB از خانواده‌های `TCP`، `Web/TLS`، `UDP`، `BUB` و روش‌های پیشرفته تشکیل شده‌اند. `BUB Spoof` نیز در گروه روش‌های پیشرفته قرار دارد.
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/fa982ca2-a171-4798-8469-0a31d6f9abce" alt="فهرست روش‌های انتقال BUB Tunnel" width="620">
