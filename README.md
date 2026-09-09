@@ -1,4 +1,3 @@
-<img width="1080" height="1206" alt="14856" src="https://github.com/user-attachments/assets/095d8e22-e4e5-429c-a1ae-ea134f774b6e" />
 # BUB TUNNEL
 
 > **A resilient tunneling platform for difficult networks — with Reverse and Direct modes, multiple transport strategies, live monitoring, traffic control, and resilient failover.**
@@ -237,7 +236,7 @@ Run `bub`, choose `Setup Server → Direct`, and use the corresponding tunnel po
 Different transports are intended for different network conditions.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/fa982ca2-a171-4798-8469-0a31d6f9abce" alt="BUB Tunnel transport selection" width="620">
+  <img src="https://github.com/user-attachments/assets/095d8e22-e4e5-429c-a1ae-ea134f774b6e" alt="BUB Tunnel transport selection" width="680">
 </p>
 
 ---
@@ -577,7 +576,7 @@ Foreign / Client
 روش‌های انتقال BUB از خانواده‌های `TCP`، `Web/TLS`، `UDP`، `BUB` و روش‌های پیشرفته تشکیل شده‌اند. `BUB Spoof` نیز در گروه روش‌های پیشرفته قرار دارد.
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/fa982ca2-a171-4798-8469-0a31d6f9abce" alt="فهرست روش‌های انتقال BUB Tunnel" width="620">
+  <img src="https://github.com/user-attachments/assets/095d8e22-e4e5-429c-a1ae-ea134f774b6e" alt="فهرست روش‌های انتقال BUB Tunnel" width="680">
 </p>
 
 ---
