@@ -92,10 +92,6 @@ Key capabilities include:
 
 ### Dashboard
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/cbee91d8-866b-4c20-ac6a-ec442ae2ad04" alt="BUB Control Center Dashboard" width="760">
-</p>
-
 ### Create Tunnel
 
 A logical tunnel can be created from the Control Center by selecting the Iran / Server and Foreign / Client nodes and completing the matching transport settings for both endpoints.
@@ -467,11 +463,6 @@ Source code, credentials, tokens, SSH keys, private configuration, and personal 
 - Live Refresh، HTTPS و PWA
 
 ### Dashboard
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/cbee91d8-866b-4c20-ac6a-ec442ae2ad04" alt="داشبورد BUB Control Center" width="760">
-</p>
-
 ### ساخت Tunnel از Control Center
 
 Tunnel منطقی را می‌توان با انتخاب Node ایران / Server و Foreign / Client و تکمیل تنظیمات متناظر Transport برای هر دو سمت، مستقیماً از Control Center ایجاد کرد.
