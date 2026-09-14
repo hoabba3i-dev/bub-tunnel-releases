@@ -100,10 +100,6 @@ Key capabilities include:
 
 A logical tunnel can be created from the Control Center by selecting the Iran / Server and Foreign / Client nodes and completing the matching transport settings for both endpoints.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/5a23de74-7e31-4e43-9b24-85c002c192f0" alt="BUB Control Center Create Tunnel" width="760">
-</p>
-
 ### Dual Endpoint Monitoring
 
 Monitoring keeps Iran / BUB Server and Foreign / BUB Client data separated so both sides of the logical tunnel can be compared directly.
@@ -145,10 +141,6 @@ Linux ARM64
 ## 🧭 First Setup
 
 BUB is managed from the main `bub` interface.
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/3fe46ecd-efea-4c42-87b2-c63ac8dce78e" alt="BUB Tunnel main menu" width="680">
-</p>
 
 During setup, choose the tunnel direction first and then complete the transport-specific configuration.
 
@@ -484,10 +476,6 @@ Source code, credentials, tokens, SSH keys, private configuration, and personal 
 
 Tunnel منطقی را می‌توان با انتخاب Node ایران / Server و Foreign / Client و تکمیل تنظیمات متناظر Transport برای هر دو سمت، مستقیماً از Control Center ایجاد کرد.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/5a23de74-7e31-4e43-9b24-85c002c192f0" alt="ساخت Tunnel در BUB Control Center" width="760">
-</p>
-
 ### مانیتورینگ جداگانه دو Endpoint
 
 اطلاعات Iran / BUB Server و Foreign / BUB Client جدا نمایش داده می‌شوند تا وضعیت هر دو سمت Tunnel مستقیماً قابل مقایسه باشد.
@@ -512,10 +500,6 @@ curl -fsSL https://raw.githubusercontent.com/hoabba3i-dev/bub-tunnel-releases/ma
 ---
 
 ## 🧭 شروع کار با Manager
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/3fe46ecd-efea-4c42-87b2-c63ac8dce78e" alt="منوی اصلی BUB Tunnel" width="680">
-</p>
 
 ابتدا جهت Tunnel را انتخاب کنید و سپس تنظیمات روش انتقال موردنظر را انجام دهید.
 
