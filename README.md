@@ -387,11 +387,7 @@ From the main menu choose `UPDATE`. The updater checks the official BUB Tunnel R
 
 ## 🔐 Licensing
 
-License Bot: **@bub_Licensebot**
-
-Support: **@Bubtunnel_support**
-
-Telegram Channel: **@bub_tunnel**
+Licensing information is provided through the official release workflow.
 
 ---
 
@@ -690,13 +686,9 @@ Domain: tunnel.example.com
 
 ---
 
-## 🔐 License و راه‌های ارتباطی
+## 🔐 License
 
-License Bot: **@bub_Licensebot**
-
-پشتیبانی: **@Bubtunnel_support**
-
-کانال رسمی Telegram: **@bub_tunnel**
+اطلاعات لایسنس از طریق فرایند رسمی انتشار ارائه می‌شود.
 
 ---
 
