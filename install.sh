@@ -29,22 +29,24 @@ trap cleanup EXIT
 
 red='\033[31m'; yellow='\033[33m'; green='\033[32m'; reset='\033[0m'
 progress() {
-    local pct="$1" msg="$2" color="$yellow" filled empty
+    local pct="$1" msg="$2" color="$yellow" filled empty bar
     if [ "$pct" -ge 100 ]; then
         color="$green"
     fi
-    filled=$((pct/5)); empty=$((20-filled))
-    printf "\r%b[" "$color"
-    if [ "$filled" -gt 0 ]; then
-        printf '%*s' "$filled" '' | tr ' ' '#'
-    fi
-    if [ "$empty" -gt 0 ]; then
-        printf '%*s' "$empty" '' | tr ' ' '-'
-    fi
-    printf "] %3d%%  %s%b" "$pct" "$msg" "$reset"
+    filled=$((pct/5))
+    empty=$((20-filled))
+    bar=""
+    while [ "$filled" -gt 0 ]; do
+        bar="${bar}#"
+        filled=$((filled-1))
+    done
+    while [ "$empty" -gt 0 ]; do
+        bar="${bar}-"
+        empty=$((empty-1))
+    done
+    printf "\r%b[%s] %3d%%  %s%b" "$color" "$bar" "$pct" "$msg" "$reset"
     if [ "$pct" -ge 100 ]; then
-        printf "
-"
+        printf "\n"
     fi
     return 0
 }
