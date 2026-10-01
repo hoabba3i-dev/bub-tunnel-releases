@@ -35,8 +35,17 @@ die() {
 export DEBIAN_FRONTEND=noninteractive
 
 progress 5 "Preparing installer"
-apt-get update -qq >/dev/null
-apt-get install -y -qq ca-certificates curl iproute2 iptables tar python3 >/dev/null
+APT_LOG="/tmp/bub-installer-apt.log"
+if ! apt-get update -qq >"$APT_LOG" 2>&1; then
+    tail -n 25 "$APT_LOG" >&2 || true
+    die "Package index update failed"
+fi
+if ! apt-get install -y -qq ca-certificates curl iproute2 iptables tar python3 >>"$APT_LOG" 2>&1; then
+    tail -n 25 "$APT_LOG" >&2 || true
+    die "Required package installation failed"
+fi
+rm -f "$APT_LOG"
+progress 10 "Requirements ready"
 
 ARCH="$(dpkg --print-architecture)"
 case "$ARCH" in
