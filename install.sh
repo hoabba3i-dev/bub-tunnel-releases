@@ -31,12 +31,15 @@ progress() {
     fi
     printf "] %3d%%  %s%b" "$pct" "$msg" "$reset"
     if [ "$pct" -ge 100 ]; then
-        printf "\n"
+        printf "
+"
     fi
     return 0
 }
 die() {
-    printf "\n%b[FAILED]%b %s\n" "$red" "$reset" "$*" >&2
+    printf "
+%b[FAILED]%b %s
+" "$red" "$reset" "$*" >&2
     exit 1
 }
 
@@ -96,8 +99,10 @@ for a in d.get("assets",[]):
         break
 PY
 )" || true
-    URL="$(printf '%s\n' "$META" | sed -n '1p')"
-    DIGEST="$(printf '%s\n' "$META" | sed -n '2p')"
+    URL="$(printf '%s
+' "$META" | sed -n '1p')"
+    DIGEST="$(printf '%s
+' "$META" | sed -n '2p')"
     if [ -n "$URL" ]; then
         ASSET_NAME="$CANDIDATE"
         ASSET_URL="$URL"
@@ -119,7 +124,8 @@ ACTUAL_SHA="$(sha256sum "$TMP/release.tar.gz" | awk '{print $1}')"
 MEMBERS="$TMP/members"
 tar -tzf "$TMP/release.tar.gz" | sed '/\/$/d' | sort > "$MEMBERS"
 EXPECTED="$TMP/expected"
-printf '%s\n' bub bub-client bub-server bub-control-center bub-manager.sh | sort > "$EXPECTED"
+printf '%s
+' bub bub-client bub-server bub-control-center bub-manager.sh | sort > "$EXPECTED"
 cmp -s "$EXPECTED" "$MEMBERS" || die "Unexpected release archive contents"
 
 progress 65 "Extracting verified release"
@@ -166,10 +172,13 @@ fi
 
 NORMALIZED_VERSION="${REPO_REF#v}"
 NORMALIZED_VERSION="${NORMALIZED_VERSION#.}"
-printf '%s\n' "$NORMALIZED_VERSION" > "$INSTALL_DIR/VERSION"
+printf '%s
+' "$NORMALIZED_VERSION" > "$INSTALL_DIR/VERSION"
 hash -r 2>/dev/null || true
 
 progress 100 "BUB Tunnel $REPO_REF installed"
 echo
-if [ -r /dev/tty ]; then\n    read -r -p "Press Enter to open BUB Manager..." _ </dev/tty || true\nfi
+if [ -r /dev/tty ]; then
+    read -r -p "Press Enter to open BUB Manager..." _ </dev/tty || true
+fi
 exec "$BIN_DIR/bub"
