@@ -23,10 +23,17 @@ progress() {
     fi
     filled=$((pct/5)); empty=$((20-filled))
     printf "\r%b[" "$color"
-    printf '%*s' "$filled" '' | tr ' ' '#'
-    printf '%*s' "$empty" '' | tr ' ' '-'
+    if [ "$filled" -gt 0 ]; then
+        printf '%*s' "$filled" '' | tr ' ' '#'
+    fi
+    if [ "$empty" -gt 0 ]; then
+        printf '%*s' "$empty" '' | tr ' ' '-'
+    fi
     printf "] %3d%%  %s%b" "$pct" "$msg" "$reset"
-    [ "$pct" -ge 100 ] && printf "\n"
+    if [ "$pct" -ge 100 ]; then
+        printf "\n"
+    fi
+    return 0
 }
 die() {
     printf "\n%b[FAILED]%b %s\n" "$red" "$reset" "$*" >&2
