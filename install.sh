@@ -36,7 +36,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 progress 5 "Preparing installer"
 apt-get update -qq >/dev/null
-apt-get install -y -qq ca-certificates curl iproute2 iptables tar >/dev/null
+apt-get install -y -qq ca-certificates curl iproute2 iptables tar python3 >/dev/null
 
 ARCH="$(dpkg --print-architecture)"
 case "$ARCH" in
