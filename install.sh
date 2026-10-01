@@ -192,7 +192,8 @@ hash -r 2>/dev/null || true
 
 progress 100 "BUB Tunnel $REPO_REF installed"
 echo
-if [ -r /dev/tty ]; then
+if [ -r /dev/tty ] && [ -w /dev/tty ]; then
     read -r -p "Press Enter to open BUB Manager..." _ </dev/tty || true
+    exec "$BIN_DIR/bub" </dev/tty >/dev/tty 2>/dev/tty
 fi
-exec "$BIN_DIR/bub"
+printf '%s\n' "Installation complete. Run: bub"
