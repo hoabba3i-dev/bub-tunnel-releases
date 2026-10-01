@@ -1,6 +1,15 @@
 #!/bin/bash
 set -Eeuo pipefail
 
+# The public install command is "curl ... | bash". Re-exec a complete local
+# copy immediately so no child process can consume the script's stdin stream.
+if [ "${BUB_INSTALLER_REEXEC:-0}" != "1" ] && [ ! -t 0 ]; then
+    SELF="/tmp/bub-installer.$$.sh"
+    curl -fsSL "https://raw.githubusercontent.com/hoabba3i-dev/bub-tunnel-releases/main/install.sh" -o "$SELF" || exit 1
+    chmod 700 "$SELF"
+    BUB_INSTALLER_REEXEC=1 exec bash "$SELF" </dev/null
+fi
+
 OWNER="hoabba3i-dev"
 REPO_NAME="bub-tunnel-releases"
 REPO="https://github.com/${OWNER}/${REPO_NAME}"
@@ -11,7 +20,10 @@ BIN_DIR="/usr/local/bin"
 
 TMP=""
 cleanup() {
-    [ -n "${TMP:-}" ] && [ -d "${TMP:-}" ] && rm -rf "$TMP"
+    if [ -n "${TMP:-}" ] && [ -d "${TMP:-}" ]; then
+        rm -rf "$TMP"
+    fi
+    return 0
 }
 trap cleanup EXIT
 
