@@ -45,11 +45,11 @@ export DEBIAN_FRONTEND=noninteractive
 
 progress 5 "Preparing installer"
 APT_LOG="/tmp/bub-installer-apt.log"
-if ! apt-get update -qq >"$APT_LOG" 2>&1; then
+if ! apt-get update -qq </dev/null >"$APT_LOG" 2>&1; then
     tail -n 25 "$APT_LOG" >&2 || true
     die "Package index update failed"
 fi
-if ! apt-get install -y -qq ca-certificates curl iproute2 iptables tar python3 >>"$APT_LOG" 2>&1; then
+if ! apt-get install -y -qq ca-certificates curl iproute2 iptables tar python3 </dev/null >>"$APT_LOG" 2>&1; then
     tail -n 25 "$APT_LOG" >&2 || true
     die "Required package installation failed"
 fi
@@ -171,5 +171,5 @@ hash -r 2>/dev/null || true
 
 progress 100 "BUB Tunnel $REPO_REF installed"
 echo
-read -r -p "Press Enter to open BUB Manager..." _
+if [ -r /dev/tty ]; then\n    read -r -p "Press Enter to open BUB Manager..." _ </dev/tty || true\nfi
 exec "$BIN_DIR/bub"
