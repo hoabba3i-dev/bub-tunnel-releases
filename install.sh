@@ -18,7 +18,9 @@ trap cleanup EXIT
 red='\033[31m'; yellow='\033[33m'; green='\033[32m'; reset='\033[0m'
 progress() {
     local pct="$1" msg="$2" color="$yellow" filled empty
-    [ "$pct" -ge 100 ] && color="$green"
+    if [ "$pct" -ge 100 ]; then
+        color="$green"
+    fi
     filled=$((pct/5)); empty=$((20-filled))
     printf "\r%b[" "$color"
     printf '%*s' "$filled" '' | tr ' ' '#'
