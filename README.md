@@ -88,7 +88,15 @@ The following transports are available without a PRO license:
 A valid BUB license unlocks the PRO transports:
 
 - `TCP Shadow`
-- `NEXUS`
+- `WSS Mux`
+- `UDP KCP`
+- `TCP Core`
+- `ICMP Echo`
+- `BUBTun`
+- `Nexus`
+- `BUBMIX`
+- `Edge X`
+- `BUB Spoof`
 
 License expiry or invalidation returns PRO transports to the locked state without changing the FREE transport list.
 
@@ -463,7 +471,15 @@ Source code, credentials, tokens, SSH keys, private configuration, and personal 
 با لایسنس معتبر BUB، روش‌های انتقال PRO فعال می‌شوند:
 
 - `TCP Shadow`
-- `NEXUS`
+- `WSS Mux`
+- `UDP KCP`
+- `TCP Core`
+- `ICMP Echo`
+- `BUBTun`
+- `Nexus`
+- `BUBMIX`
+- `Edge X`
+- `BUB Spoof`
 
 با پایان اعتبار یا نامعتبرشدن لایسنس، روش‌های PRO دوباره قفل می‌شوند و فهرست FREE تغییری نمی‌کند.
 
