@@ -1,92 +1,115 @@
 #!/bin/bash
-set -euo pipefail
+set -Eeuo pipefail
 
 OWNER="hoabba3i-dev"
 REPO_NAME="bub-tunnel-releases"
 REPO="https://github.com/${OWNER}/${REPO_NAME}"
+API="https://api.github.com/repos/${OWNER}/${REPO_NAME}"
 LATEST_URL="${REPO}/releases/latest"
 INSTALL_DIR="/opt/bub-tunnel"
 BIN_DIR="/usr/local/bin"
 
+TMP=""
 cleanup() {
-    if [ -n "${TMP:-}" ] && [ -d "${TMP:-}" ]; then
-        rm -rf "$TMP"
-    fi
+    [ -n "${TMP:-}" ] && [ -d "${TMP:-}" ] && rm -rf "$TMP"
 }
 trap cleanup EXIT
 
-echo "======================================"
-echo "        BUB Tunnel Installer"
-echo "======================================"
-
-if [ "$(id -u)" != "0" ]; then
-    echo "ERROR: Please run as root."
+red='\033[31m'; yellow='\033[33m'; green='\033[32m'; reset='\033[0m'
+progress() {
+    local pct="$1" msg="$2" color="$yellow" filled empty
+    [ "$pct" -ge 100 ] && color="$green"
+    filled=$((pct/5)); empty=$((20-filled))
+    printf "\r%b[" "$color"
+    printf '%*s' "$filled" '' | tr ' ' '#'
+    printf '%*s' "$empty" '' | tr ' ' '-'
+    printf "] %3d%%  %s%b" "$pct" "$msg" "$reset"
+    [ "$pct" -ge 100 ] && printf "\n"
+}
+die() {
+    printf "\n%b[FAILED]%b %s\n" "$red" "$reset" "$*" >&2
     exit 1
-fi
+}
 
+[ "$(id -u)" = "0" ] || die "Please run as root."
 export DEBIAN_FRONTEND=noninteractive
 
-echo "[1/5] Installing required packages..."
-apt-get update
-apt-get install -y ca-certificates curl iproute2 iptables tar
+progress 5 "Preparing installer"
+apt-get update -qq >/dev/null
+apt-get install -y -qq ca-certificates curl iproute2 iptables tar >/dev/null
 
 ARCH="$(dpkg --print-architecture)"
 case "$ARCH" in
     amd64) RELEASE_ARCH="amd64" ;;
     arm64) RELEASE_ARCH="arm64" ;;
-    *)
-        echo "ERROR: Unsupported architecture: $ARCH"
-        exit 1
-        ;;
+    *) die "Unsupported architecture: $ARCH" ;;
 esac
 
-LATEST_EFFECTIVE="$(curl -fsSL -o /dev/null -w '%{url_effective}' "$LATEST_URL")"
+progress 15 "Finding latest release"
+LATEST_EFFECTIVE="$(curl -fsSL --retry 3 --retry-delay 1 -o /dev/null -w '%{url_effective}' "$LATEST_URL")"
 REPO_REF="${LATEST_EFFECTIVE##*/}"
+[[ "$REPO_REF" =~ ^(v\.?)?[0-9]+\.[0-9]+\.[0-9]+$ ]] || die "Could not determine latest release"
 
-# Accept canonical X.Y.Z plus historical vX.Y.Z and v.X.Y.Z tags.
-if [[ ! "$REPO_REF" =~ ^(v\.?)?[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-    echo "ERROR: Could not determine latest BUB release from: $LATEST_EFFECTIVE"
-    exit 1
-fi
-
-# Support both historical lowercase assets (bub-vX.Y.Z-...) and newer
-# uppercase assets (BUB-X.Y.Z-...). Prefer the historical form first so the
-# v0.90.3 bridge release remains installable by the same convention as v0.90.2.
 ASSET_CANDIDATES=(
     "bub-${REPO_REF}-linux-${RELEASE_ARCH}.tar.gz"
     "BUB-${REPO_REF}-linux-${RELEASE_ARCH}.tar.gz"
 )
 
-echo "[2/5] Preparing BUB $REPO_REF..."
-
 TMP="$(mktemp -d /tmp/bub-install.XXXXXX)"
 mkdir -p "$TMP/extracted"
 
-echo "[3/5] Downloading BUB..."
+progress 25 "Reading release metadata"
+RELEASE_JSON="$TMP/release.json"
+curl -fsSL --retry 3 --retry-delay 1     -H "Accept: application/vnd.github+json"     "$API/releases/tags/$REPO_REF" -o "$RELEASE_JSON" || die "Could not read GitHub release metadata"
+
 ASSET_NAME=""
+ASSET_URL=""
+EXPECTED_SHA=""
+
 for CANDIDATE in "${ASSET_CANDIDATES[@]}"; do
-    ASSET_URL="${REPO}/releases/download/${REPO_REF}/${CANDIDATE}"
-    echo "Trying asset: $CANDIDATE"
-    if curl -fL --retry 2 --retry-delay 1 "$ASSET_URL" -o "$TMP/release.tar.gz"; then
+    META="$(python3 - "$RELEASE_JSON" "$CANDIDATE" <<'PY'
+import json,sys
+p,n=sys.argv[1:]
+d=json.load(open(p))
+for a in d.get("assets",[]):
+    if a.get("name")==n:
+        print(a.get("browser_download_url",""))
+        print(a.get("digest",""))
+        break
+PY
+)" || true
+    URL="$(printf '%s\n' "$META" | sed -n '1p')"
+    DIGEST="$(printf '%s\n' "$META" | sed -n '2p')"
+    if [ -n "$URL" ]; then
         ASSET_NAME="$CANDIDATE"
+        ASSET_URL="$URL"
+        EXPECTED_SHA="${DIGEST#sha256:}"
         break
     fi
 done
-if [ -z "$ASSET_NAME" ]; then
-    echo "ERROR: No compatible release asset found for $REPO_REF / $RELEASE_ARCH"
-    exit 1
-fi
-echo "Asset: $ASSET_NAME"
 
-echo "[4/5] Installing BUB binaries..."
+[ -n "$ASSET_NAME" ] || die "No compatible release asset for $REPO_REF / $RELEASE_ARCH"
+[[ "$EXPECTED_SHA" =~ ^[0-9a-fA-F]{64}$ ]] || die "GitHub release asset has no valid SHA256 digest"
+
+progress 35 "Downloading $REPO_REF"
+curl -fsSL --retry 5 --retry-delay 2 --retry-all-errors     "$ASSET_URL" -o "$TMP/release.tar.gz" || die "Release download failed"
+
+progress 55 "Verifying release"
+ACTUAL_SHA="$(sha256sum "$TMP/release.tar.gz" | awk '{print $1}')"
+[ "${ACTUAL_SHA,,}" = "${EXPECTED_SHA,,}" ] || die "Release SHA256 verification failed"
+
+MEMBERS="$TMP/members"
+tar -tzf "$TMP/release.tar.gz" | sed '/\/$/d' | sort > "$MEMBERS"
+EXPECTED="$TMP/expected"
+printf '%s\n' bub bub-client bub-server bub-control-center bub-manager.sh | sort > "$EXPECTED"
+cmp -s "$EXPECTED" "$MEMBERS" || die "Unexpected release archive contents"
+
+progress 65 "Extracting verified release"
 tar -xzf "$TMP/release.tar.gz" -C "$TMP/extracted"
 
 for BIN in bub bub-server bub-client bub-control-center; do
-    SRC_BIN="$(find "$TMP/extracted" -type f -name "$BIN" -print -quit)"
-    if [ -z "$SRC_BIN" ]; then
-        echo "ERROR: $BIN not found in release."
-        exit 1
-    fi
+    SRC_BIN="$TMP/extracted/$BIN"
+    [ -f "$SRC_BIN" ] || die "$BIN not found in release"
     chmod 755 "$SRC_BIN"
     case "$BIN" in
         bub) BIN_BUB="$SRC_BIN" ;;
@@ -96,32 +119,27 @@ for BIN in bub bub-server bub-client bub-control-center; do
     esac
 done
 
+progress 75 "Backing up current binaries"
 mkdir -p "$INSTALL_DIR" /etc/bub-tunnel /var/log/bub-tunnel "$INSTALL_DIR/backups"
-
 STAMP="$(date +%Y%m%d-%H%M%S)"
 BACKUP_DIR="$INSTALL_DIR/backups/$STAMP"
 mkdir -p "$BACKUP_DIR"
-
 for BIN in bub bub-server bub-client bub-control-center; do
-    if [ -f "$BIN_DIR/$BIN" ]; then
-        cp -a "$BIN_DIR/$BIN" "$BACKUP_DIR/$BIN"
-    fi
+    [ ! -f "$BIN_DIR/$BIN" ] || cp -a "$BIN_DIR/$BIN" "$BACKUP_DIR/$BIN"
 done
 
+progress 85 "Installing BUB"
 install -m 755 "$BIN_SERVER" "$BIN_DIR/bub-server.new"
 install -m 755 "$BIN_CLIENT" "$BIN_DIR/bub-client.new"
 install -m 755 "$BIN_BUB" "$BIN_DIR/bub.new"
 install -m 755 "$BIN_CONTROL" "$BIN_DIR/bub-control-center.new"
-
 mv -f "$BIN_DIR/bub-server.new" "$BIN_DIR/bub-server"
 mv -f "$BIN_DIR/bub-client.new" "$BIN_DIR/bub-client"
 mv -f "$BIN_DIR/bub.new" "$BIN_DIR/bub"
 mv -f "$BIN_DIR/bub-control-center.new" "$BIN_DIR/bub-control-center"
 
-# Install the compatibility manager wrapper when it is bundled in the release.
-# Fall back to a symlink for compatibility with older binary-only archives.
-BIN_MANAGER="$(find "$TMP/extracted" -type f -name 'bub-manager.sh' -print -quit)"
-if [ -n "$BIN_MANAGER" ]; then
+BIN_MANAGER="$TMP/extracted/bub-manager.sh"
+if [ -f "$BIN_MANAGER" ]; then
     install -m 755 "$BIN_MANAGER" "$INSTALL_DIR/bub-manager.sh"
     install -m 755 "$INSTALL_DIR/bub-manager.sh" "$BIN_DIR/bub-manager"
 else
@@ -130,25 +148,10 @@ fi
 
 NORMALIZED_VERSION="${REPO_REF#v}"
 NORMALIZED_VERSION="${NORMALIZED_VERSION#.}"
-printf "%s\n" "$NORMALIZED_VERSION" > "$INSTALL_DIR/VERSION"
-
+printf '%s\n' "$NORMALIZED_VERSION" > "$INSTALL_DIR/VERSION"
 hash -r 2>/dev/null || true
 
-echo "[5/5] Installation completed."
+progress 100 "BUB Tunnel $REPO_REF installed"
 echo
-echo "======================================"
-echo "       BUB Tunnel installed"
-echo "======================================"
-echo
-echo "Version : $REPO_REF"
-echo "BUB     : $BIN_DIR/bub"
-echo "Server  : $BIN_DIR/bub-server"
-echo "Client  : $BIN_DIR/bub-client"
-echo "Control : $BIN_DIR/bub-control-center"
-echo
-echo "Installed files:"
-ls -lh "$BIN_DIR/bub" "$BIN_DIR/bub-server" "$BIN_DIR/bub-client" "$BIN_DIR/bub-control-center"
-echo
-echo "Run:"
-echo "  bub"
-echo
+read -r -p "Press Enter to open BUB Manager..." _
+exec "$BIN_DIR/bub"
