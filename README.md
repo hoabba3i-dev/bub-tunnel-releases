@@ -2,41 +2,11 @@
 
 > **A resilient tunneling platform for difficult networks — with Reverse and Direct modes, multiple transport strategies, live monitoring, traffic control, and resilient failover.**
 
-<p align="center">
-  <a href="#persian-guide"><img src="https://img.shields.io/badge/%F0%9F%87%AE%F0%9F%87%B7%20Persian%20Guide-FFD700?style=for-the-badge" alt="🇮🇷 Persian Guide"></a>
-</p>
 
-<p align="center" dir="rtl">
-  <a href="docs/fa/control-center.md"><img src="https://img.shields.io/badge/Control%20Center-FFD700?style=for-the-badge" alt="کنترل سنتر"></a>
-  <a href="docs/fa/installation.md"><img src="https://img.shields.io/badge/Install-FFD700?style=for-the-badge" alt="نصب"></a>
-  <a href="docs/fa/reverse.md"><img src="https://img.shields.io/badge/Reverse-FFD700?style=for-the-badge" alt="راه‌اندازی Reverse"></a>
-  <a href="docs/fa/direct.md"><img src="https://img.shields.io/badge/Direct-FFD700?style=for-the-badge" alt="راه‌اندازی Direct"></a>
-  <a href="docs/fa/wssmux.md"><img src="https://img.shields.io/badge/WSSMux-FFD700?style=for-the-badge" alt="راهنمای WSSMux"></a>
-  <a href="docs/fa/bubmix.md"><img src="https://img.shields.io/badge/BUBMIX-FFD700?style=for-the-badge" alt="BUBMIX"></a>
-  <a href="docs/fa/nexus.md"><img src="https://img.shields.io/badge/NEXUS-FFD700?style=for-the-badge" alt="NEXUS"></a>
-  <a href="docs/fa/bubtun.md"><img src="https://img.shields.io/badge/BUBTun-FFD700?style=for-the-badge" alt="BUBTun"></a>
-  <a href="docs/fa/manager.md"><img src="https://img.shields.io/badge/Manager-FFD700?style=for-the-badge" alt="مدیریت"></a>
-  <a href="docs/fa/monitoring.md"><img src="https://img.shields.io/badge/Monitoring-FFD700?style=for-the-badge" alt="مانیتورینگ"></a>
-</p>
 
 ---
 
-<p align="center">
-  <img src="https://img.shields.io/badge/%F0%9F%87%AC%F0%9F%87%A7%20English%20Guide-FFD700?style=for-the-badge" alt="🇬🇧 English Guide">
-</p>
 
-<p align="center">
-  <a href="docs/en/control-center.md"><img src="https://img.shields.io/badge/Control%20Center-FFD700?style=for-the-badge" alt="Control Center"></a>
-  <a href="docs/en/installation.md"><img src="https://img.shields.io/badge/Installation-FFD700?style=for-the-badge" alt="Installation"></a>
-  <a href="docs/en/reverse.md"><img src="https://img.shields.io/badge/Reverse%20Setup-FFD700?style=for-the-badge" alt="Reverse Setup"></a>
-  <a href="docs/en/direct.md"><img src="https://img.shields.io/badge/Direct%20Setup-FFD700?style=for-the-badge" alt="Direct Setup"></a>
-  <a href="docs/en/wssmux.md"><img src="https://img.shields.io/badge/WSSMux%20Guide-FFD700?style=for-the-badge" alt="WSSMux Guide"></a>
-  <a href="docs/en/bubmix.md"><img src="https://img.shields.io/badge/BUBMIX-FFD700?style=for-the-badge" alt="BUBMIX"></a>
-  <a href="docs/en/nexus.md"><img src="https://img.shields.io/badge/NEXUS-FFD700?style=for-the-badge" alt="NEXUS"></a>
-  <a href="docs/en/bubtun.md"><img src="https://img.shields.io/badge/BUBTun-FFD700?style=for-the-badge" alt="BUBTun"></a>
-  <a href="docs/en/manager.md"><img src="https://img.shields.io/badge/Manager-FFD700?style=for-the-badge" alt="Manager"></a>
-  <a href="docs/en/monitoring.md"><img src="https://img.shields.io/badge/Monitoring-FFD700?style=for-the-badge" alt="Monitoring"></a>
-</p>
 
 BUB Tunnel is designed to create and manage Linux network tunnels without forcing every network path to use the same transport strategy.
 
@@ -65,6 +35,26 @@ A tunnel can operate in **Reverse** or **Direct** mode. Depending on the selecte
 - Integrated GitHub Releases updater
 - License-controlled production releases
 - Linux AMD64 and ARM64 builds
+
+## 🟡 FREE
+
+The following transports are available without a PRO license:
+
+- `TCP Raw`
+- `TCP Mux`
+- `WS Mux`
+- `TLS Mux`
+- `UDP Simple`
+- `QUIC`
+
+## 🟠 PRO
+
+A valid BUB license unlocks the PRO transports:
+
+- `TCP Shadow`
+- `NEXUS`
+
+License expiry or invalidation returns PRO transports to the locked state without changing the FREE transport list.
 
 ---
 
@@ -100,9 +90,6 @@ A logical tunnel can be created from the Control Center by selecting the Iran / 
 
 Monitoring keeps Iran / BUB Server and Foreign / BUB Client data separated so both sides of the logical tunnel can be compared directly.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/5e6f6dba-e9e5-4af6-891b-5947ad5358ee" alt="BUB Control Center Dual Endpoint Monitoring" width="760">
-</p>
 
 > Control Center is a management/control-plane component. Core transport, session, protocol and BUBMIX datapath behavior remain separate from the Control Center layer.
 
@@ -140,9 +127,6 @@ BUB is managed from the main `bub` interface.
 
 During setup, choose the tunnel direction first and then complete the transport-specific configuration.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/f3110430-7111-4e06-b956-0c39f928dfb5" alt="BUB Tunnel mode selection" width="620">
-</p>
 
 ---
 
@@ -223,9 +207,6 @@ Run `bub`, choose `Setup Server → Direct`, and use the corresponding tunnel po
 
 Different transports are intended for different network conditions.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/095d8e22-e4e5-429c-a1ae-ea134f774b6e" alt="BUB Tunnel transport selection" width="680">
-</p>
 
 ---
 
@@ -311,9 +292,6 @@ It can manage multiple configured carriers, observe their availability, and prov
 
 Each underlying transport keeps its own configuration and behavior.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/4c22f687-3771-4bbc-8bc7-460bd78a5b2b" alt="BUBMIX transport configuration" width="520">
-</p>
 
 > The public documentation intentionally describes BUBMIX at the feature level. Carrier-selection logic, health algorithms, failover sequencing, session handling, scheduling, probe behavior, and other internal implementation details are proprietary and are not documented here.
 
@@ -348,9 +326,6 @@ Typical actions include Edit, Start, Stop, Restart, Live Log, Delete, and Schedu
 
 Common configuration areas include `Connection`, `Transport`, transport-specific settings, and advanced tunnel configuration.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/cd735f4b-e975-4fb4-b513-f5ee636c178e" alt="BUB Tunnel configuration menu" width="620">
-</p>
 
 ---
 
@@ -359,9 +334,6 @@ Common configuration areas include `Connection`, `Transport`, transport-specific
 
 The live status view can report operational information such as uptime, active connections, traffic, current and peak speed, CPU and memory usage, reconnect counter, peer ping/jitter/packet loss, external connectivity checks, and tunnel health.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/9eead10b-7776-4bc6-8282-a0e45815fa39" alt="BUB Tunnel live monitoring and traffic limit" width="620">
-</p>
 
 ---
 
@@ -403,6 +375,7 @@ Public binary packages contain only:
 bub
 bub-client
 bub-server
+bub-control-center
 bub-manager.sh
 ```
 
@@ -438,6 +411,26 @@ Source code, credentials, tokens, SSH keys, private configuration, and personal 
 - بروزرسانی داخلی
 - پشتیبانی از `Linux AMD64` و `Linux ARM64`
 
+## 🟡 FREE
+
+روش‌های انتقال زیر بدون لایسنس PRO در دسترس هستند:
+
+- `TCP Raw`
+- `TCP Mux`
+- `WS Mux`
+- `TLS Mux`
+- `UDP Simple`
+- `QUIC`
+
+## 🟠 PRO
+
+با لایسنس معتبر BUB، روش‌های انتقال PRO فعال می‌شوند:
+
+- `TCP Shadow`
+- `NEXUS`
+
+با پایان اعتبار یا نامعتبرشدن لایسنس، روش‌های PRO دوباره قفل می‌شوند و فهرست FREE تغییری نمی‌کند.
+
 ---
 
 <a id="fa-control-center"></a>
@@ -471,9 +464,6 @@ Tunnel منطقی را می‌توان با انتخاب Node ایران / Serve
 
 اطلاعات Iran / BUB Server و Foreign / BUB Client جدا نمایش داده می‌شوند تا وضعیت هر دو سمت Tunnel مستقیماً قابل مقایسه باشد.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/5e6f6dba-e9e5-4af6-891b-5947ad5358ee" alt="مانیتورینگ دو Endpoint در BUB Control Center" width="760">
-</p>
 
 > Control Center لایه مدیریت و Control Plane است و از Core / Transport / Session / Protocol / BUBMIX datapath جدا نگه داشته می‌شود.
 
@@ -494,9 +484,6 @@ curl -fsSL https://raw.githubusercontent.com/hoabba3i-dev/bub-tunnel-releases/ma
 
 ابتدا جهت Tunnel را انتخاب کنید و سپس تنظیمات روش انتقال موردنظر را انجام دهید.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/f3110430-7111-4e06-b956-0c39f928dfb5" alt="انتخاب حالت Reverse یا Direct" width="620">
-</p>
 
 ---
 
@@ -550,9 +537,6 @@ Foreign / Client
 
 روش‌های انتقال BUB از خانواده‌های `TCP`، `Web/TLS`، `UDP`، `BUB` و روش‌های پیشرفته تشکیل شده‌اند. `BUB Spoof` نیز در گروه روش‌های پیشرفته قرار دارد.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/095d8e22-e4e5-429c-a1ae-ea134f774b6e" alt="فهرست روش‌های انتقال BUB Tunnel" width="680">
-</p>
 
 ---
 
@@ -620,9 +604,6 @@ Domain: tunnel.example.com
 
 هر روش انتقال تنظیمات و رفتار مخصوص خودش را حفظ می‌کند.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/4c22f687-3771-4bbc-8bc7-460bd78a5b2b" alt="تنظیم Carrier های BUBMIX" width="520">
-</p>
 
 > مستندات عمومی عمداً فقط قابلیت‌های BUBMIX را معرفی می‌کنند. منطق انتخاب مسیر، الگوریتم‌های سلامت، ترتیب Failover، مدیریت Session، Scheduler، Probe و سایر جزئیات پیاده‌سازی داخلی منتشر نمی‌شوند.
 
@@ -653,9 +634,6 @@ Domain: tunnel.example.com
 
 از Manager می‌توانید عملیات مدیریت و تنظیم Tunnel را انجام دهید.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/cd735f4b-e975-4fb4-b513-f5ee636c178e" alt="منوی تنظیمات Tunnel" width="620">
-</p>
 
 ---
 
@@ -664,9 +642,6 @@ Domain: tunnel.example.com
 
 بخش `Status` اطلاعات عملیاتی مانند زمان فعالیت، اتصال‌ها، ترافیک، سرعت، مصرف منابع، تعداد اتصال مجدد، `Ping`، `Jitter`، `Packet Loss` و سلامت Tunnel را نمایش می‌دهد.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/9eead10b-7776-4bc6-8282-a0e45815fa39" alt="مانیتورینگ زنده و Traffic Limit" width="620">
-</p>
 
 ---
 
@@ -708,6 +683,7 @@ Package عمومی هر معماری فقط شامل فایل‌های Productio
 bub
 bub-client
 bub-server
+bub-control-center
 bub-manager.sh
 ```
 
